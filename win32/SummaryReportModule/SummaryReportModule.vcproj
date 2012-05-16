@@ -4,7 +4,7 @@
 	Version="9.00"
 	Name="SummaryReportModule"
 	ProjectGUID="{1CA42FA6-A110-4BB1-B7D6-C0AB6C4FA1AD}"
-	RootNamespace="HashCalcModule"
+	RootNamespace="SummaryReportModule"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -136,7 +136,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="framework.lib"
+				AdditionalDependencies="libtskframework.lib libtsk.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(TSK_HOME)\framework\win32\framework\$(ConfigurationName)&quot;;&quot;$(TSK_HOME)\win32\$(ConfigurationName)&quot;;&quot;$(POCO_HOME)\lib&quot;"
 				GenerateDebugInformation="true"
