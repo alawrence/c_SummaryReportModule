@@ -14,7 +14,12 @@
 */
 
 // System includes
-#include <windows.h>
+#ifndef TSK_WIN32
+    #include <windows.h>
+#else
+    #error Only windows platforms currently supported
+#endif
+
 #include <sstream>
 
 // Framework includes
