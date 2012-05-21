@@ -283,6 +283,8 @@ extern "C"
                 }
                 out << "</tr>" << std::endl;
             }
+            if(artifacts.size() > 0)
+                out << "</tbody>" << std::endl << "</table>" << std::endl;
             out << "</body>" << std::endl;
             out << "</html>" << std::endl;
 
