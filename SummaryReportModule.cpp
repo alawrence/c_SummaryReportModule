@@ -35,6 +35,27 @@
 extern "C" 
 {
 
+    // Convert reserved HTML characters to HTML entities
+	string HTMLEncode(const string str)
+	{
+		string convertedStr;
+		for (size_t i = 0; i < str.size(); i++) {
+			if (str[i] == '<')
+				convertedStr.append("&lt;");
+			else if (str[i] == '>')
+				convertedStr.append("&gt;");
+			else if (str[i] == '&')
+				convertedStr.append("&amp;");
+			else if (str[i] == '"')
+				convertedStr.append("&quot;");
+			else if (str[i] == '\'')
+				convertedStr.append("&apos;");
+			else
+				convertedStr += str[i];
+		}
+		return convertedStr;
+	}
+
     void addStyle(Poco::FileOutputStream & out){
         out << "<style type=\"text/css\">" << std::endl <<  
             "table.gridtable {" << std::endl <<
@@ -129,6 +150,11 @@ extern "C"
             TskImgDB & imgdb = TskServices::Instance().getImgDB();
 
             std::stringstream condition;
+
+            out << "<h1>Sleuth Kit Framework Summary Report</h1>" << std::endl;
+
+            std::vector<std::wstring> names = imgdb.getImageNames();
+            out << "<h2>Image Path: " << TskUtilities::toUTF8(names.front()) << "</h2>" << std::endl;
 
             out << "<h2>Image Layout</h2>" << std::endl;
             std::list<TskVolumeInfoRecord> volumeInfoList;
@@ -276,7 +302,8 @@ extern "C"
                                 break;
 
                             case TSK_STRING:
-                                out << attr->getValueString() << "</td>" << std::endl;
+                                std::string encoded = HTMLEncode(attr->getValueString());
+                                out << encoded << "</td>" << std::endl;
                                 break;
                         }
                     }
